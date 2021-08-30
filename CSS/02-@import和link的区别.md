@@ -26,6 +26,6 @@
   document.head.appendChild(link);
   ```
 
-- **兼容性区别。** ()
+- **兼容性区别。** (搁现在也没啥影响了)
   - `@import` 是 CSS2.1 才有的语法，故只可在 IE5+ 才能识别;
   - `link` 标签作为 HTML 元素，不存在兼容性问题。
