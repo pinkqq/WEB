@@ -40,6 +40,12 @@
 - **内容（Content）**：元素的内容。
 - **元素（Element）**：开始标签、结束标签与内容相结合，便是一个完整的元素。
 
+### 空元素
+
+没有内容、只有一个标签的 HTML 元素被称为空元素。此类标签通常用来在此元素所在位置插入/嵌入一些东西。在开始标签中添加斜杠，比如 `<img src="" />`，是关闭空元素的正确方法，HTML、XHTML 和 XML 都接受这种方式。
+
+> 注: 空元素（`Empty elements`） 有时也被叫作 `void elements`.
+
 ## 属性
 
 ![attr](https://mdn.mozillademos.org/files/16476/attribute.png)
