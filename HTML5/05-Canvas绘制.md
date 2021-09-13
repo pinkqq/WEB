@@ -772,3 +772,90 @@ ctx.measureText(text);
 ![01.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7ff558229f214c42af90e4ccde19f208~tplv-k3u1fbpfcp-watermark.image)
 
 ## 绘制图像
+
+引入图像到 canvas 的步骤只需要两步：
+
+- 获取图片资源
+- 画上去
+
+### 获取图片资源
+
+canvas 支持的图片源类型：
+
+- **HTMLImageElement**：
+
+  - **`new Image()`**：
+    ```js
+    let img = new Image();
+    img.onload = function () {
+      // drawImage to canvas
+    };
+    img.src = "XXX.png";
+    ```
+  - **`<img>`**：
+    ```html
+    <img id="img" src="XXX.png" />
+    <script>
+      let img = document.getElementById("img");
+      img.onload = function () {
+        // drawImage to canvas
+      };
+    </script>
+    ```
+
+- **HTMLVideoElement**：`<video>`
+  canvas 会绘制当前视频帧，我们可以搭配 video 事件使用，比如下面的例子：
+
+  ```js
+  let video = document.getElementById("video");
+
+  // 媒体的第一帧加载完成时，渲染第一帧
+  video.onloadeddata = function () {};
+
+  // 播放暂停时，渲染当前帧
+  video.onpause = function () {};
+  ```
+
+  ![01 (1).gif](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3c4a9596fe7d409a8eda8159993d824e~tplv-k3u1fbpfcp-watermark.image?)
+
+- **HTMLCanvasElement**：`<canvas>`
+  一个常用的应用就是将第二个 canvas 作为第一个 canvas 的缩略图：
+
+  ```js
+  let sourceCanvas = document.getElementById("source");
+  let thumbCanvas = document.getElementById("thumb");
+  thumbCtx.drawImage(source, 0, 0, 100, 50);
+  ```
+
+  ![01.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/92451efbd9644018aa88ea6faf008e5b~tplv-k3u1fbpfcp-watermark.image?)
+
+- **ImageBitmap**：高性能的位图，可以低延迟地绘制，它运用 `createImageBitmap()` 工厂方法模式，它可以从多种源中生成。
+
+### drawImage()
+
+获得图片对象后，我们通过 `drawImage` 方法将它渲染到 canvas 里。`drawImage` 参数有三种情况：三个参数，五个参数，九个参数。
+
+#### 基础用法（三个参数）
+
+```js
+drawImage(image, x, y);
+```
+
+- `image`：图片对象
+- `x,y`：在 canvas 中的起始坐标
+
+#### 缩放（五个参数）
+
+```js
+drawImage(image, x, y, width, height);
+```
+
+- `width,height`：图片对象在 canvas 中的绘制尺寸
+
+#### 切片（九个参数）
+
+```js
+drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+```
+
+![01.jpeg](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9115b8783a7045feb72897529ae23fb2~tplv-k3u1fbpfcp-watermark.image?)
