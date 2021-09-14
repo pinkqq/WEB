@@ -859,3 +859,106 @@ drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 ```
 
 ![01.jpeg](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9115b8783a7045feb72897529ae23fb2~tplv-k3u1fbpfcp-watermark.image?)
+
+## 状态的保存和恢复
+
+`save()` 和 `restore()`，这两个方法是简单绘制和复杂绘制的一条分界线，可以帮我们省下不少的重复劳动。
+
+- `save()`：保存画布的所有状态
+- `restore()`：恢复保存的画布状态
+
+画布的状态被保存在一个栈中，一个绘画状态包括：
+
+- 以及下面这些属性：
+  - 描边/填充样式：`strokeStyle`, `fillStyle`, `globalAlpha`
+  - 线的样式：`lineWidth`, `lineCap`, `lineJoin`, `miterLimit`, `lineDashOffset`
+  - 阴影：`shadowOffsetX`, `shadowOffsetY`, `shadowBlur`, `shadowColor`,
+  - 字体样式：`font`, `textAlign`, `textBaseline`, `direction`
+  - 平滑质量：`imageSmoothingEnabled`
+  - 合成属性：`globalCompositeOperation`
+- 当前变形
+- 当前裁剪路径
+
+## 变形
+
+变形是一种更强大的方法，它可以移动原点、对网格进行旋转和缩放。
+
+### 移动 translate
+
+移动 canvas 和它的原点到一个不同的位置。
+
+```js
+translate(x, y);
+```
+
+x 是左右偏移量，y 是上下偏移量，如下图所示：
+
+![01.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5a9d72e0ac7448c8bd884296bfb5c21e~tplv-k3u1fbpfcp-watermark.image?)
+
+### 旋转 rotate
+
+**以原点为中心**旋转 canvas。
+
+```js
+rotate(angle);
+```
+
+angle 取正时，顺时针旋转；angle 取负时，逆时针旋转。以弧度为单位的值。
+
+![01.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f24e226bcc394ae28410fb112a1914e9~tplv-k3u1fbpfcp-watermark.image?)
+
+### 缩放 scale
+
+对形状，位图进行缩小或者放大，即增减图形在 canvas 中的像素数目。
+
+```js
+scale(x, y);
+```
+
+- 默认值为 1， 为实际大小。
+- 比 1 小，会缩小图形，
+- 比 1 大，会放大图形。
+- 如果是负数，相当于以 x 或 y 轴作为对称轴镜像反转
+
+```js
+// 被拉伸的矩形
+ctx.save();
+ctx.scale(10, 3);
+ctx.fillRect(1, 10, 10, 10);
+ctx.restore();
+
+// 以 y 轴为对称轴做镜像反转
+ctx.scale(-1, 1);
+ctx.font = "48px serif";
+ctx.fillText("荷包蛋卷", -193, 120);
+```
+
+![01.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1052b4e6aa2148aba6d1ba96e1264637~tplv-k3u1fbpfcp-watermark.image?)
+
+### 变形矩阵 transform
+
+对变形矩阵直接修改。
+
+- **基础用法**
+
+  ```js
+  transform(a, b, c, d, e, f);
+  ```
+
+  - `a`：水平方向的缩放
+  - `b`：竖直方向的倾斜偏移
+  - `c`：水平方向的倾斜偏移
+  - `d`：竖直方向的缩放
+  - `e`：水平方向的移动
+  - `f`：竖直方向的移动
+
+- **重置矩阵**
+  重置当前变形为单位矩阵，等同于 `ctx.setTransform(1, 0, 0, 1, 0, 0); `
+  ```js
+  resetTransform();
+  ```
+- **重置并修改矩阵**
+  将当前的变形矩阵重置为单位矩阵，然后用相同的参数调用 transform 方法。
+  ```js
+  setTransform(a, b, c, d, e, f);
+  ```
