@@ -962,3 +962,99 @@ ctx.fillText("荷包蛋卷", -193, 120);
   ```js
   setTransform(a, b, c, d, e, f);
   ```
+
+## 组合
+
+`globalCompositeOperation` 提供了 12 种合成图形的方式：
+
+| 名称               | 描述                                                                        | 展示                                                                                                                           |
+| ------------------ | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `source-over`      | 默认设置，直接在原有内容上绘制新内容                                        | ![01.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e7e61f3c77ca4f18b7db40aff28db09a~tplv-k3u1fbpfcp-watermark.image?) |
+| `source-in`        | 新内容只在新内容和原有内容**重叠**的区域绘制，**其他都是透明的**。          | ![02.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6c88fe95f9f9452a90c118f03a0a9617~tplv-k3u1fbpfcp-watermark.image?) |
+| `source-out`       | 新内容在新内容和原有内容**不重叠**的区域绘制，其他都是透明的。              | ![03.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/64b07d8099ca4779a3da9b93a05eb3b2~tplv-k3u1fbpfcp-watermark.image?) |
+| `source-atop`      | 新内容只在新内容和原有内容**重叠**的区域绘制， **其他都是保持原有内容的**。 | ![04.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f85cfb9e54d640ee9be2672df75628d7~tplv-k3u1fbpfcp-watermark.image?) |
+| `destination-over` | 在原有内容下面绘制性新内容                                                  | ![05.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/556de1cbac3843dba7e952bf362b7ac3~tplv-k3u1fbpfcp-watermark.image?) |
+| `destination-in`   | 原有内容只保留新内容和原有内容**重叠**的区域，新内容不显示                  | ![06.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4453f0e53807495e8088997cfd088950~tplv-k3u1fbpfcp-watermark.image?) |
+| `destination-out`  | 原有内容只保留新内容和原有内容**不重叠**的区域，新内容不显示                | ![01.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7b000c1bd86e4929905b9027671b3984~tplv-k3u1fbpfcp-watermark.image?) |
+| `destination-atop` | 原有内容只保留新内容和原有内容**重叠**的区域绘制，**新内容全部保留**        | ![02.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d6579be09555408186d88e359e342728~tplv-k3u1fbpfcp-watermark.image?) |
+| `lighter`          | 颜色值相加                                                                  | ![03.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3703d761cbf84d10b6b465927ed08559~tplv-k3u1fbpfcp-watermark.image?) |
+| `copy`             | 只显示新图形。                                                              | ![04.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/667aaedef3244064a5d78d0c4245cf20~tplv-k3u1fbpfcp-watermark.image?) |
+| `xor`              | 重叠区域是透明的                                                            | ![05.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6a09e149719f4787ab12fd37c9423ae2~tplv-k3u1fbpfcp-watermark.image?) |
+| `multiply`         | 像素相乘（更黑暗）                                                          | ![06.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/903a849c81fc4f4ab8b0c5650395464b~tplv-k3u1fbpfcp-watermark.image?) |
+| `screen`           | 像素被倒转，相乘，再倒转（更明亮）                                          | ![07.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a72ce0fdf5ff456dbf9be99c2643b39e~tplv-k3u1fbpfcp-watermark.image?) |
+| `overlay`          | multiply 和 screen 的结合，原本暗的地方更暗，原本亮的地方更亮。             | ![08.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/599164996ca8430a988051f780e791ef~tplv-k3u1fbpfcp-watermark.image?) |
+| `darken`           | 保留两个图层中最暗的像素。                                                  | ![09.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/066790c765bd46b6ac502f7ac188929d~tplv-k3u1fbpfcp-watermark.image?) |
+| `lighten`          | 保留两个图层中最亮的像素。                                                  | ![10.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f28da99ee1944700afa7c33a69a6699c~tplv-k3u1fbpfcp-watermark.image?) |
+| `color-dodge`      | 将底层除以顶层的反置。                                                      | ![01.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ddbef559e743473d931521a1833a426a~tplv-k3u1fbpfcp-watermark.image?) |
+| `color-burn`       | 将反置的底层除以顶层，然后将结果反过来。                                    | ![02.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/850bfbceb4eb47178af9bfb50c32552c~tplv-k3u1fbpfcp-watermark.image?) |
+| `hard-light`       | multiply 和 screen 的结合，但上下图层互换了。                               | ![03.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e2abdf545e0d46c3b76948d6d89f6270~tplv-k3u1fbpfcp-watermark.image?) |
+| `soft-light`       | 用顶层减去底层或者相反来得到一个正值。                                      | ![05.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/331e0de4ddd1419c830e1bdfbbec5512~tplv-k3u1fbpfcp-watermark.image?) |
+| `difference`       | 一个柔和版本的 hard-light。纯黑或纯白不会导致纯黑或纯白。                   | ![06.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/be8cb91d191d4e9583e62cf734a99d12~tplv-k3u1fbpfcp-watermark.image?) |
+| `exclusion`        | 和 difference 相似，但对比度较低。                                          | ![07.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b5c16e8120134e339179d37655b3b72e~tplv-k3u1fbpfcp-watermark.image?) |
+| `hue`              | 保留了底层的亮度（luma）和色度（chroma），同时采用了顶层的色调（hue）。     | ![08.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2b44717e6ac24519bd20a4807dfc8909~tplv-k3u1fbpfcp-watermark.image?) |
+| `saturation`       | 保留底层的亮度（luma）和色调（hue），同时采用顶层的色度（chroma）。         | ![09.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9a78ee615199421884d41062d2a65622~tplv-k3u1fbpfcp-watermark.image?) |
+| `color`            | 保留了底层的亮度（luma），同时采用了顶层的色调(hue)和色度(chroma)。         | ![10.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/804d411115e1417e8fa53961ba93bb55~tplv-k3u1fbpfcp-watermark.image?) |
+| `luminosity`       | 保持底层的色调（hue）和色度（chroma），同时采用顶层的亮度（luma）。         | ![11.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/81ee86afddcc4336bcf95f67ab787eda~tplv-k3u1fbpfcp-watermark.image?) |
+
+其中，`destination-in`的遮盖方式，可以用于实现抠图效果（只显示涂抹区域）。
+
+## 裁剪
+
+`clip()` 方法其实是绘制图形（`stroke()`，`fill()`）的第三个进阶方法，`clip()` 会将当前正在构建的路径转换为当前的裁剪路径，所有在路径以外的部分都会被隐藏。
+
+默认情况下，canvas 有一个与它自身一样大的裁切路径（也就是没有裁切效果）。
+
+我们来画一个星空，用一个圆形的裁切路径来限制随机星星的绘制区域：
+
+```js
+function draw() {
+  var ctx = document.getElementById("canvas").getContext("2d");
+
+  // 黑色背景
+  ctx.fillRect(0, 0, 600, 600);
+  ctx.translate(300, 300);
+
+  // 圆形裁剪区域
+  ctx.beginPath();
+  ctx.arc(0, 0, 250, 0, Math.PI * 2, true);
+  ctx.clip();
+
+  // 渐变蓝色背景
+  var lingrad = ctx.createLinearGradient(0, 0, 600, 600);
+  lingrad.addColorStop(0, "#232256");
+  lingrad.addColorStop(1, "#143778");
+
+  ctx.fillStyle = lingrad;
+  ctx.fillRect(-300, -300, 600, 600);
+
+  // 画星星✨
+  for (var j = 1; j < 100; j++) {
+    ctx.save();
+    ctx.fillStyle = "#fff";
+    ctx.translate(
+      250 - Math.floor(Math.random() * 500),
+      250 - Math.floor(Math.random() * 500)
+    );
+    drawStar(ctx, Math.floor(Math.random() * 4) + 2);
+    ctx.restore();
+  }
+}
+function drawStar(ctx, r) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(r, 0);
+  for (var i = 0; i < 9; i++) {
+    ctx.rotate(Math.PI / 5);
+    if (i % 2 == 0) {
+      ctx.lineTo((r / 0.525731) * 0.200811, 0);
+    } else {
+      ctx.lineTo(r, 0);
+    }
+  }
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+}
+```
+
+![01.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9cb357fb38df43c2910eaa2b08ae8886~tplv-k3u1fbpfcp-watermark.image?)
