@@ -425,7 +425,7 @@ A rx ry x-axis-rotation large-arc-flag sweep-flag x y
 
 ### \<textPath>
 
-根据 `<path>` 元素的形状来放置文字。利用 `xlink:href` 属性取得一个任意路径，把字符对齐到路径，于是字体会环绕路径、顺着路径走：
+根据 `<path>` 元素的形状来放置文字。利用 `href` 属性取得一个任意路径，把字符对齐到路径，于是字体会环绕路径、顺着路径走：
 
 ```xml
 <defs>
@@ -438,7 +438,7 @@ A rx ry x-axis-rotation large-arc-flag sweep-flag x y
   />
 </defs>
 <text font-family="Verdana" font-size="42.5">
-  <textPath xlink:href="#MyPath">
+  <textPath href="#MyPath">
     We go up, then we go down, then up again
   </textPath>
 </text>
